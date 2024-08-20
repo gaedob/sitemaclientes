@@ -47,8 +47,7 @@ class ClienteServicioTest {
 
 
         clienteServicio.agregarCliente("", "", "", "", "");
-        
-
+        Assertions.assertEquals(false, clienteServicio.getMsgError().isEmpty());
 
 
     }
