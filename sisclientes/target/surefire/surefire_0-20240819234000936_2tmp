@@ -1,0 +1,10 @@
+#surefire_0
+#Mon Aug 19 23:40:00 CLT 2024
+basedir=/Users/giovanniedgardoaedobenavides/Documents/CursoTalento/sitemaclientes/sisclientes
+forkMode=once
+jpda.address=62079
+jpda.listen=true
+localRepository=/Users/giovanniedgardoaedobenavides/.m2/repository
+maven.ext.class.path=/Users/giovanniedgardoaedobenavides/.vscode/extensions/oracle.oracle-java-22.1.1/nbcode/java/maven-nblib/netbeans-eventspy.jar
+maven.surefire.debug=-agentlib\:jdwp\=transport\=dt_socket,server\=n,address\=62079
+test=com.inforcap.sistemaclientes.servicio.ClienteServicioTest
