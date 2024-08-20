@@ -16,9 +16,9 @@ public class Menu implements IMenu {
 
     private final ClienteServicio clienteServicio;
     private ArchivoServicio archivoServicio;
-    private ExportadorCsv exportarCsv;
-    private ExportadorTxt exportarTxt;
-    private static Scanner scanner = new Scanner(System.in);
+    private final ExportadorCsv exportarCsv;
+    private final ExportadorTxt exportarTxt;
+    private static final Scanner scanner = new Scanner(System.in);
 
     private static final String fileName = "Clientes";
     private static final String fileName1 = "DBClientes.csv";
@@ -40,23 +40,19 @@ public class Menu implements IMenu {
     }
 
     private String menuColorAzul(String tituloMenu) {
-        String newTitulo = azul + tituloMenu + reset;
-        return newTitulo;
+        return azul + tituloMenu + reset;
     }
 
     private String menuColorVerde(String tituloMenu) {
-        String newTitulo = verde + tituloMenu + reset;
-        return newTitulo;
+        return verde + tituloMenu + reset;
     }
 
     private String menuColorRojo(String tituloMenu) {
-        String newTitulo = rojo + tituloMenu + reset;
-        return newTitulo;
+        return rojo + tituloMenu + reset;
     }
 
     private String menuColorAmarillo(String tituloMenu) {
-        String newTitulo = amarillo + tituloMenu + reset;
-        return newTitulo;
+        return amarillo + tituloMenu + reset;
     }
 
     private void principal() {
@@ -135,7 +131,7 @@ public class Menu implements IMenu {
         imprimirTextLn("El estado actual es: " + clienteOld.getNombreCategoria().toString());
         imprimirTextLn("1.- Si desea cambiar el estado del Cliente a Inactivo");
         imprimirTextLn("2.- Si desea mantener el estado del cliente Activo");
-        imprimirText(menuColorVerde(negrita + "Ingrese opcion: "));
+        imprimirText(menuColorVerde(negrita + "Ingrese opcion:"));
 
         int statusEstado;
         statusEstado = scanner.nextInt();
@@ -159,10 +155,9 @@ public class Menu implements IMenu {
         imprimirTextLn("2.- El Nombre del Cliente es: " + clienteOld.getNombreCliente());
         imprimirTextLn("3.- El Apellido del Cliente es: " + clienteOld.getApellidoCliente());
         imprimirTextLn("4.- Los años como Cliente son: " + clienteOld.getAniosCliente());
-        imprimirText(menuColorVerde(negrita + "Ingrese opcion a editar de los datos del cliente: "));
-        //int statusEstado = scanner.nextInt();
+        imprimirText(menuColorVerde(negrita + "Ingrese opcion a editar de los datos del cliente:"));
 
-        int opcionEditar = 0;
+        int opcionEditar;
 
         int[] option = {1, 2, 3, 4};
         opcionEditar = getValueOpcion(option);
@@ -232,6 +227,9 @@ public class Menu implements IMenu {
                         clienteOld.getNombreCategoria().toString()
                 );
 
+                break;
+            }
+            default -> {
                 break;
             }
 
@@ -332,6 +330,9 @@ public class Menu implements IMenu {
 
                     break;
                 }
+                default -> {
+                    break;
+                }
 
             }
 
@@ -367,7 +368,7 @@ public class Menu implements IMenu {
     @Override
     public void exportarDatos() {
         imprimirTextLn("");
-        imprimirTextLn(menuColorAzul(negrita + "-------------Exportarr Datos------------- "));
+        imprimirTextLn(menuColorAzul(negrita + "-------------Exportar Datos------------- "));
 
         imprimirTextLn("Seleccione el formato a exportar:");
         imprimirTextLn("1.- Formato csv");
@@ -383,7 +384,7 @@ public class Menu implements IMenu {
         int opcion = getValueOpcion(option);
 
         switch (opcion) {
-            case 1:
+            case 1 -> {
                 archivoServicio = new ArchivoServicio(exportarCsv, clienteServicio);
 
                 List<IClasstoSave> listaClientesToCsv = Utilidad.getListToSave(clienteServicio.getListaClientes());
@@ -395,7 +396,8 @@ public class Menu implements IMenu {
                     imprimirTextLn(menuColorRojo(negrita + exportarCsv.getStatusMessage()));
                 }
                 break;
-            case 2:
+            }
+            case 2 -> {
                 archivoServicio = new ArchivoServicio(exportarTxt, clienteServicio);
                 List<IClasstoSave> listaClientestoTxt = Utilidad.getListToSave(clienteServicio.getListaClientes());
                 archivoServicio.exportar(fileName + ".txt", listaClientestoTxt);
@@ -405,8 +407,10 @@ public class Menu implements IMenu {
                     imprimirTextLn(menuColorRojo(negrita + exportarCsv.getStatusMessage()));
                 }
                 break;
-            default:
+            }
+            default -> {
                 break;
+            }
         }
 
         clearScreen();
@@ -427,24 +431,12 @@ public class Menu implements IMenu {
             while (opcion != 6) {
                 Utilidad.limpiezaPantalla();
                 switch (opcion) {
-                    case 1:
-                        listarClientes();
-                        break;
-                    case 2:
-                        agregarCliente();
-                        break;
-                    case 3:
-                        editarCliente();
-                        break;
-                    case 4:
-                        importarDatos();
-                        break;
-                    case 5:
-                        exportarDatos();
-                        break;
-                    default:
-                        principal();
-                        break;
+                    case 1 -> listarClientes();
+                    case 2 -> agregarCliente();
+                    case 3 -> editarCliente();
+                    case 4 -> importarDatos();
+                    case 5 -> exportarDatos();
+                    default -> principal();
 
                 }
                 opcion = scanner.nextInt();
